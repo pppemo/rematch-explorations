@@ -17,10 +17,10 @@ export default {
       }
     }
   },
-  effects: (dispatch) => ({
-    async incrementAsync(payload, rootState) {
+  effects: dispatch => ({
+    async incrementAsync(payload) {
       await new Promise(resolve => setTimeout(resolve, 1000))
-      dispatch.count.increment(payload)
+      dispatch.counter.increment(payload)
     }
   })
 }

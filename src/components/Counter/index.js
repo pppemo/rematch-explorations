@@ -4,7 +4,7 @@ import logo from "./../../logo.svg";
 
 class Counter extends Component {
   render() {
-    const { increment, reset, count } = this.props
+    const { increment, incrementAsync, reset, count, isLoading } = this.props
     return (
       <div className="App">
         <header className="App-header">
@@ -20,8 +20,10 @@ class Counter extends Component {
           >
             Learn React
           </a>
+          {isLoading && <b>Loading...</b>}
           Count: {count}
           <button onClick={increment}>Increment</button>
+          <button onClick={incrementAsync}>Increment async</button>
           <button onClick={reset}>Reset</button>
         </header>
       </div>
@@ -31,12 +33,14 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
   return {
-    count: state.counter.count
+    count: state.counter.count,
+    isLoading: state.loading.effects.counter.incrementAsync
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   increment: () => dispatch.counter.increment(1),
+  incrementAsync: () => dispatch.counter.incrementAsync(1),
   reset: dispatch.counter.reset
 });
 
